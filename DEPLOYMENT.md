@@ -1,21 +1,32 @@
 # Deployment Information
 
-## Public URL
-🚀 **Railway:** https://2a202600268phamthanhtungday12-production.up.railway.app
+## Public URLs
+🚀 **Railway:** https://2a202600268phamthanhtungday12-production.up.railway.app  
+🚀 **Render:** https://day12-agent-0m7k.onrender.com
 
-## Platform
-Railway (https://railway.com)
+## Platforms
 
-## Project
-- **Name:** 2A202600268_PhamThanhTung_Day12
+### Railway
+- **Project:** 2A202600268_PhamThanhTung_Day12
 - **Environment:** production
 - **Builder:** Dockerfile (multi-stage)
+- **Plan:** Usage-based
+
+### Render
+- **Service:** day12-agent
+- **Region:** Singapore
+- **Builder:** Docker
+- **Plan:** Free
 
 ## Test Commands & Results
 
-### 1. Health Check ✅
+### 1. Health Check ✅ (Both platforms)
 ```bash
+# Railway
 curl https://2a202600268phamthanhtungday12-production.up.railway.app/health
+
+# Render
+curl https://day12-agent-0m7k.onrender.com/health
 ```
 ```json
 {
@@ -25,7 +36,7 @@ curl https://2a202600268phamthanhtungday12-production.up.railway.app/health
   "uptime_seconds": 88.4,
   "total_requests": 2,
   "checks": { "llm": "mock" },
-  "timestamp": "2026-04-17T10:39:08.286813+00:00"
+  "timestamp": "2026-04-17T10:39:08+00:00"
 }
 ```
 
@@ -43,7 +54,7 @@ curl https://2a202600268phamthanhtungday12-production.up.railway.app/ready
 curl -X POST https://2a202600268phamthanhtungday12-production.up.railway.app/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Hello"}'
-# Response: 401 Unauthorized
+# → 401 Unauthorized
 
 # With API key → 200 OK
 curl -X POST https://2a202600268phamthanhtungday12-production.up.railway.app/ask \
@@ -54,9 +65,9 @@ curl -X POST https://2a202600268phamthanhtungday12-production.up.railway.app/ask
 ```json
 {
   "question": "What is Docker?",
-  "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!",
+  "answer": "Container là cách đóng gói app để chạy ở mọi nơi...",
   "model": "gpt-4o-mini",
-  "timestamp": "2026-04-17T10:39:24.372942+00:00"
+  "timestamp": "2026-04-17T10:39:24+00:00"
 }
 ```
 
@@ -65,6 +76,7 @@ curl -X POST https://2a202600268phamthanhtungday12-production.up.railway.app/ask
 - Returns HTTP 429 when exceeded
 
 ## Environment Variables Set
+
 | Variable | Value | Description |
 |----------|-------|-------------|
 | `ENVIRONMENT` | `production` | Enables strict validation |
@@ -73,7 +85,7 @@ curl -X POST https://2a202600268phamthanhtungday12-production.up.railway.app/ask
 | `DAILY_BUDGET_USD` | `5.0` | Daily spending limit |
 | `RATE_LIMIT_PER_MINUTE` | `20` | Max requests per minute |
 | `LLM_MODEL` | `gpt-4o-mini` | Model identifier |
-| `PORT` | _(auto by Railway)_ | Server port |
+| `PORT` | _(auto-injected)_ | Server port |
 
 ## Deployment Config
 - **Builder:** Dockerfile (multi-stage, python:3.11-slim)
@@ -83,4 +95,4 @@ curl -X POST https://2a202600268phamthanhtungday12-production.up.railway.app/ask
 - **Non-root user:** `agent`
 
 ## Screenshots
-_(Xem thư mục `screenshots/`)_
+- `screenshots/render_live.png` — Render dashboard with live service
