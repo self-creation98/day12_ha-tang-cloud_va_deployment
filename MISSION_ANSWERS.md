@@ -1,7 +1,7 @@
 # Day 12 Lab - Mission Answers
 
-> **Student Name:** ___  
-> **Student ID:** ___  
+> **Student Name:** Phạm Thanh Tùng 
+> **Student ID:** 2A202600268
 > **Date:** 17/04/2026
 
 ---
